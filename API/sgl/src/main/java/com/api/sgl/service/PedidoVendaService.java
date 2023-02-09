@@ -1,6 +1,7 @@
 package com.api.sgl.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,12 @@ public class PedidoVendaService {
 	public PedidoVendaEntity savePedidoVenda(PedidoVendaEntity pv) {
 		
 		return pedidoVendaRepository.save(pv);
+		
+	}
+	
+	public Optional<PedidoVendaEntity> findByIdPedidoVenda(Long id) {
+		
+		return pedidoVendaRepository.findById(id);
 		
 	}
 	

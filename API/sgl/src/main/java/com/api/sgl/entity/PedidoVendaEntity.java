@@ -1,13 +1,16 @@
 package com.api.sgl.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,6 +32,9 @@ public class PedidoVendaEntity {
 	
 	@Column(name="dhtermino")
 	private LocalDateTime dhTermino;
+	
+	@OneToMany(mappedBy="pedidoVenda",fetch=FetchType.LAZY)
+	private List<ChaveWindowsEntity> chavesWindows;
 
 	public long getId() {
 		return id;
@@ -62,9 +68,13 @@ public class PedidoVendaEntity {
 		this.dhTermino = dhTermino;
 	}
 
+	public List<ChaveWindowsEntity> getChavesWindows() {
+		return chavesWindows;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(dhInicio, dhTermino, id, numero);
+		return Objects.hash(chavesWindows, dhInicio, dhTermino, id, numero);
 	}
 
 	@Override
@@ -76,8 +86,8 @@ public class PedidoVendaEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		PedidoVendaEntity other = (PedidoVendaEntity) obj;
-		return Objects.equals(dhInicio, other.dhInicio) && Objects.equals(dhTermino, other.dhTermino) && id == other.id
-				&& Objects.equals(numero, other.numero);
+		return Objects.equals(chavesWindows, other.chavesWindows) && Objects.equals(dhInicio, other.dhInicio)
+				&& Objects.equals(dhTermino, other.dhTermino) && id == other.id && Objects.equals(numero, other.numero);
 	}
 	
 }
